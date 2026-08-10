@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Listas de favoritos</h2>
+
+{% for lista in listas %}
+
+<h3>
+    {{ lista.nome }}
+    -
+    {{ lista.usuario.nome }}
+</h3>
+
+<ul>
+
+{% for favorito in lista.favoritos %}
+
+<li>
+    {{ favorito.anuncio.titulo }}
+</li>
+
+{% else %}
+
+<li>
+    Lista vazia.
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% else %}
+
+<p>
+    Nenhuma lista de favoritos cadastrada.
+</p>
+
+{% endfor %}
+
+{% endblock %}

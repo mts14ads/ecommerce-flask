@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Usuários</h2>
+
+<ul>
+
+{% for usuario in usuarios %}
+
+<li>
+    {{ usuario.id }} -
+    {{ usuario.nome }} -
+    {{ usuario.email }}
+</li>
+
+{% else %}
+
+<li>
+    Nenhum usuário cadastrado.
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% endblock %}

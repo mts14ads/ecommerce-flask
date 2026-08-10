@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Categorias</h2>
+
+<ul>
+
+{% for categoria in categorias %}
+
+<li>
+
+    <strong>
+        {{ categoria.nome }}
+    </strong>
+
+    {% if categoria.descricao %}
+        - {{ categoria.descricao }}
+    {% endif %}
+
+</li>
+
+{% else %}
+
+<li>
+    Nenhuma categoria cadastrada.
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Perguntas</h2>
+
+<ul>
+
+{% for pergunta in perguntas %}
+
+<li>
+
+    <strong>
+        {{ pergunta.autor.nome }}
+    </strong>
+
+    perguntou no anúncio
+
+    <strong>
+        {{ pergunta.anuncio.titulo }}
+    </strong>:
+
+    {{ pergunta.texto }}
+
+    {% if pergunta.resposta %}
+
+    <br>
+
+    <strong>
+        Resposta:
+    </strong>
+
+    {{ pergunta.resposta }}
+
+    {% endif %}
+
+</li>
+
+{% else %}
+
+<li>
+    Nenhuma pergunta cadastrada.
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% endblock %}
