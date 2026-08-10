@@ -83,12 +83,3 @@ python run.py
 Acesse:
 
 http://127.0.0.1:5000/
-Justificativa
-
-O Flask foi utilizado por ser um framework Python adequado para desenvolvimento web e permitir uma estrutura simples e modular. Os modelos representam as entidades do sistema, as rotas controlam as requisições e os templates representam a interface.
-
-O SQLite foi utilizado por sua simplicidade e facilidade de configuração para um projeto acadêmico inicial.
-
-Repositório
-
-https://github.com/mts14ads/ecommerce-flask
