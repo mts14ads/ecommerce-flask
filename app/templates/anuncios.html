@@ -1,46 +1,6 @@
 {% extends "base.html" %}
-
+{% block title %}Anúncios{% endblock %}
 {% block content %}
-
-<h2>Anúncios</h2>
-
-<p>
-
-<a href="{{ url_for('main.novo_anuncio') }}">
-    + Novo anúncio
-</a>
-
-</p>
-
-<ul>
-
-{% for anuncio in anuncios %}
-
-<li>
-
-    <strong>
-        {{ anuncio.titulo }}
-    </strong>
-
-    -
-
-    R$ {{ "%.2f"|format(anuncio.preco) }}
-
-    -
-
-    Categoria:
-    {{ anuncio.categoria.nome }}
-
-</li>
-
-{% else %}
-
-<li>
-    Nenhum anúncio cadastrado.
-</li>
-
-{% endfor %}
-
-</ul>
-
+<div class="topbar"><h2>Anúncios</h2><a class="button" href="{{ url_for('main.anuncio_novo') }}">Novo registro</a></div>
+<table><thead><tr><th>ID</th><th>Título</th><th>Preço</th><th>Estoque</th><th>Usuário</th><th>Categoria</th><th>Ações</th></tr></thead><tbody>{% for r in registros %}<tr><td>{{ r.id }}</td><td>{{ r.titulo }}</td><td>R$ {{ "%.2f"|format(r.preco) }}</td><td>{{ r.estoque }}</td><td>{{ r.usuario.nome }}</td><td>{{ r.categoria.nome }}</td><td class="actions"><a href="{{ url_for('main.anuncio_editar', id=r.id) }}">Editar</a><form method="post" action="{{ url_for('main.anuncio_excluir', id=r.id) }}" onsubmit="return confirmarExclusao()"><button>Excluir</button></form></td></tr>{% else %}<tr><td colspan="7">Nenhum registro.</td></tr>{% endfor %}</tbody></table>
 {% endblock %}

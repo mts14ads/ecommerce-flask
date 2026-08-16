@@ -1,17 +1,15 @@
 {% extends "base.html" %}
-
+{% block title %}Início{% endblock %}
 {% block content %}
-
-<h2>Início</h2>
-
-<p>
-    Bem-vindo à plataforma de e-commerce.
-</p>
-
-<p>
-    O sistema permite que usuários anunciem produtos,
-    realizem compras, façam perguntas e mantenham
-    listas de anúncios favoritos.
-</p>
-
+<h2>Sistema de E-commerce</h2>
+<p>Projeto ADS Toledo Prudente</p>
+<div class="cards">
+    <a href="{{ url_for('main.usuarios') }}">Gerenciar usuários</a>
+    <a href="{{ url_for('main.categorias') }}">Gerenciar categorias</a>
+    <a href="{{ url_for('main.anuncios') }}">Gerenciar anúncios</a>
+    <a href="{{ url_for('main.perguntas') }}">Gerenciar perguntas</a>
+    <a href="{{ url_for('main.compras') }}">Gerenciar compras</a>
+    <a href="{{ url_for('main.favoritos') }}">Gerenciar favoritos</a>
+    <a href="{{ url_for('main.relatorios') }}">Consultar relatórios</a>
+</div>
 {% endblock %}

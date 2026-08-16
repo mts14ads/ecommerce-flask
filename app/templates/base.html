@@ -1,88 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <title>Plataforma E-commerce</title>
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta charset="utf-8">
+    <title>{% block title %}E-commerce Flask{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
-
 <header>
-
-    <h1>Plataforma E-commerce</h1>
-
+    <h1>Plataforma de E-commerce</h1>
     <nav>
-
-        <a href="{{ url_for('main.index') }}">
-            Início
-        </a>
-
-        |
-
-        <a href="{{ url_for('main.usuarios') }}">
-            Usuários
-        </a>
-
-        |
-
-        <a href="{{ url_for('main.categorias') }}">
-            Categorias
-        </a>
-
-        |
-
-        <a href="{{ url_for('main.anuncios') }}">
-            Anúncios
-        </a>
-
-        |
-
-        <a href="{{ url_for('main.perguntas') }}">
-            Perguntas
-        </a>
-
-        |
-
-        <a href="{{ url_for('main.compras') }}">
-            Compras
-        </a>
-
-        |
-
-        <a href="{{ url_for('main.favoritos') }}">
-            Favoritos
-        </a>
-
-        |
-
-        <a href="{{ url_for('main.relatorios') }}">
-            Relatórios
-        </a>
-
+        <a href="{{ url_for('main.index') }}">Início</a>
+        <a href="{{ url_for('main.usuarios') }}">Usuários</a>
+        <a href="{{ url_for('main.categorias') }}">Categorias</a>
+        <a href="{{ url_for('main.anuncios') }}">Anúncios</a>
+        <a href="{{ url_for('main.perguntas') }}">Perguntas</a>
+        <a href="{{ url_for('main.compras') }}">Compras</a>
+        <a href="{{ url_for('main.favoritos') }}">Favoritos</a>
+        <a href="{{ url_for('main.relatorios') }}">Relatórios</a>
     </nav>
-
-    <hr>
-
 </header>
-
-
 <main>
-
-    {% block content %}
-
-    {% endblock %}
-
+    {% with messages = get_flashed_messages() %}
+      {% for message in messages %}
+        <div class="flash">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
 </main>
-
+<script>
+function confirmarExclusao() {
+    return confirm("Tem certeza que deseja excluir este registro?");
+}
+</script>
 </body>
-
 </html>

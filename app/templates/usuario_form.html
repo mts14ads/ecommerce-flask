@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Usuário{% endblock %}
+{% block content %}
+<h2>Usuário</h2>
+<form method="post" class="form">
+
+<label>Nome<input name="nome" required value="{{ registro.nome if registro else '' }}"></label>
+<label>E-mail<input type="email" name="email" required value="{{ registro.email if registro else '' }}"></label>
+<label>Senha<input type="password" name="senha" required value="{{ registro.senha if registro else '' }}"></label>
+
+<button class="button" type="submit">Salvar</button>
+<a href="{{ url_for('main.usuarios') }}">Cancelar</a>
+</form>
+{% endblock %}

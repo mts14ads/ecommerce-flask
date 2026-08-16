@@ -1,37 +1,6 @@
 {% extends "base.html" %}
-
+{% block title %}Compras{% endblock %}
 {% block content %}
-
-<h2>Compras</h2>
-
-<ul>
-
-{% for compra in compras %}
-
-<li>
-
-    {{ compra.comprador.nome }}
-
-    comprou
-
-    {{ compra.quantidade }}x
-
-    {{ compra.anuncio.titulo }}
-
-    por
-
-    R$ {{ "%.2f"|format(compra.valor_unitario) }}
-
-</li>
-
-{% else %}
-
-<li>
-    Nenhuma compra registrada.
-</li>
-
-{% endfor %}
-
-</ul>
-
+<div class="topbar"><h2>Compras</h2><a class="button" href="{{ url_for('main.compra_novo') }}">Novo registro</a></div>
+<table><thead><tr><th>ID</th><th>Quantidade</th><th>Valor unitário</th><th>Comprador</th><th>Anúncio</th><th>Ações</th></tr></thead><tbody>{% for r in registros %}<tr><td>{{ r.id }}</td><td>{{ r.quantidade }}</td><td>R$ {{ "%.2f"|format(r.valor_unitario) }}</td><td>{{ r.comprador.nome }}</td><td>{{ r.anuncio.titulo }}</td><td class="actions"><a href="{{ url_for('main.compra_editar', id=r.id) }}">Editar</a><form method="post" action="{{ url_for('main.compra_excluir', id=r.id) }}" onsubmit="return confirmarExclusao()"><button>Excluir</button></form></td></tr>{% else %}<tr><td colspan="6">Nenhum registro.</td></tr>{% endfor %}</tbody></table>
 {% endblock %}

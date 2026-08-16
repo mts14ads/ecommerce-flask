@@ -1,41 +1,10 @@
 {% extends "base.html" %}
-
+{% block title %}Favoritos{% endblock %}
 {% block content %}
-
-<h2>Listas de favoritos</h2>
-
-{% for lista in listas %}
-
-<h3>
-    {{ lista.nome }}
-    -
-    {{ lista.usuario.nome }}
-</h3>
-
-<ul>
-
-{% for favorito in lista.favoritos %}
-
-<li>
-    {{ favorito.anuncio.titulo }}
-</li>
-
-{% else %}
-
-<li>
-    Lista vazia.
-</li>
-
-{% endfor %}
-
-</ul>
-
-{% else %}
-
-<p>
-    Nenhuma lista de favoritos cadastrada.
-</p>
-
-{% endfor %}
-
+<div class="topbar"><h2>Listas de favoritos</h2><a class="button" href="{{ url_for('main.lista_nova') }}">Nova lista</a></div>
+<table><thead><tr><th>ID</th><th>Nome</th><th>Usuário</th><th>Ações</th></tr></thead>
+<tbody>{% for r in listas %}<tr><td>{{ r.id }}</td><td>{{ r.nome }}</td><td>{{ r.usuario.nome }}</td><td class="actions"><a href="{{ url_for('main.lista_editar', id=r.id) }}">Editar</a><form method="post" action="{{ url_for('main.lista_excluir', id=r.id) }}" onsubmit="return confirmarExclusao()"><button>Excluir</button></form></td></tr>{% else %}<tr><td colspan="4">Nenhuma lista.</td></tr>{% endfor %}</tbody></table>
+<div class="topbar"><h2>Itens favoritos</h2><a class="button" href="{{ url_for('main.favorito_novo') }}">Novo favorito</a></div>
+<table><thead><tr><th>ID</th><th>Lista</th><th>Anúncio</th><th>Ações</th></tr></thead>
+<tbody>{% for r in itens %}<tr><td>{{ r.id }}</td><td>{{ r.lista.nome }}</td><td>{{ r.anuncio.titulo }}</td><td class="actions"><a href="{{ url_for('main.favorito_editar', id=r.id) }}">Editar</a><form method="post" action="{{ url_for('main.favorito_excluir', id=r.id) }}" onsubmit="return confirmarExclusao()"><button>Excluir</button></form></td></tr>{% else %}<tr><td colspan="4">Nenhum favorito.</td></tr>{% endfor %}</tbody></table>
 {% endblock %}

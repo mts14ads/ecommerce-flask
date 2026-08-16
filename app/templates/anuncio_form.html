@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Anúncio{% endblock %}
+{% block content %}
+<h2>Anúncio</h2>
+<form method="post" class="form">
+
+<label>Título<input name="titulo" required value="{{ registro.titulo if registro else '' }}"></label>
+<label>Descrição<textarea name="descricao" required>{{ registro.descricao if registro else '' }}</textarea></label>
+<label>Preço<input type="number" step="0.01" min="0" name="preco" required value="{{ registro.preco if registro else '' }}"></label>
+<label>Estoque<input type="number" min="0" name="estoque" required value="{{ registro.estoque if registro else '' }}"></label>
+<label>Usuário<select name="usuario_id" required>{% for u in usuarios %}<option value="{{ u.id }}" {% if registro and registro.usuario_id == u.id %}selected{% endif %}>{{ u.nome }}</option>{% endfor %}</select></label>
+<label>Categoria<select name="categoria_id" required>{% for c in categorias %}<option value="{{ c.id }}" {% if registro and registro.categoria_id == c.id %}selected{% endif %}>{{ c.nome }}</option>{% endfor %}</select></label>
+
+<button class="button" type="submit">Salvar</button>
+<a href="{{ url_for('main.anuncios') }}">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Pergunta{% endblock %}
+{% block content %}
+<h2>Pergunta</h2>
+<form method="post" class="form">
+
+<label>Pergunta<textarea name="texto" required>{{ registro.texto if registro else '' }}</textarea></label>
+<label>Resposta<textarea name="resposta">{{ registro.resposta if registro else '' }}</textarea></label>
+<label>Usuário<select name="usuario_id" required>{% for u in usuarios %}<option value="{{ u.id }}" {% if registro and registro.usuario_id == u.id %}selected{% endif %}>{{ u.nome }}</option>{% endfor %}</select></label>
+<label>Anúncio<select name="anuncio_id" required>{% for a in anuncios %}<option value="{{ a.id }}" {% if registro and registro.anuncio_id == a.id %}selected{% endif %}>{{ a.titulo }}</option>{% endfor %}</select></label>
+
+<button class="button" type="submit">Salvar</button>
+<a href="{{ url_for('main.perguntas') }}">Cancelar</a>
+</form>
+{% endblock %}
