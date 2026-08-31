@@ -1,0 +1,38 @@
+```html
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Relatório de compras e vendas</h2>
+
+<table class="table table-striped bg-white">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Anúncio</th>
+            <th>Comprador</th>
+            <th>Quantidade</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for c in compras %}
+        <tr>
+            <td>{{ c.id }}</td>
+            <td>{{ c.anuncio.titulo }}</td>
+            <td>{{ c.comprador.nome }}</td>
+            <td>{{ c.quantidade }}</td>
+            <td>R$ {{ '%.2f'|format(c.quantidade * c.valor_unitario) }}</td>
+        </tr>
+
+        {% else %}
+        <tr>
+            <td colspan="5">Nenhuma compra.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+```

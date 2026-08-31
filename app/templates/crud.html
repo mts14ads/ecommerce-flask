@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>{{ title }}</h2>
+
+    <a href="/{{ endpoint }}/novo" class="btn btn-primary">
+        Novo registro
+    </a>
+
+</div>
+
+<div class="card shadow-sm">
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-striped table-hover align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        {% for campo in fields %}
+
+                        <th>
+                            {{ campo|replace("_", " ")|title }}
+                        </th>
+
+                        {% endfor %}
+
+                        <th>Ações</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for registro in registros %}
+
+                    <tr>
+
+                        <td>
+                            {{ registro.id }}
+                        </td>
+
+                        {% for campo in fields %}
+
+                        <td>
+
+                            {% if campo == "senha" %}
+
+                                ********
+
+                            {% else %}
+
+                                {{ registro[campo] }}
+
+                            {% endif %}
+
+                        </td>
+
+                        {% endfor %}
+
+                        <td>
+
+                            <a
+                                href="/{{ endpoint }}/{{ registro.id }}/editar"
+                                class="btn btn-sm btn-warning"
+                            >
+                                Editar
+                            </a>
+
+                            <form
+                                method="POST"
+                                action="/{{ endpoint }}/{{ registro.id }}/excluir"
+                                style="display:inline;"
+                                onsubmit="return confirm('Tem certeza que deseja excluir este registro?');"
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-sm btn-danger"
+                                >
+                                    Excluir
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td
+                            colspan="20"
+                            class="text-center"
+                        >
+                            Nenhum registro encontrado.
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

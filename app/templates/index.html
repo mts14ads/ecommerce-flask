@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="p-5 bg-white rounded shadow-sm">
+
+    <h1>Plataforma de E-commerce</h1>
+
+    <p class="lead">
+        Sistema Flask com autenticação, CRUD, Bootstrap e SQLite.
+    </p>
+
+    {% if session.get('usuario_id') %}
+
+        <a
+            class="btn btn-primary"
+            href="/anuncios"
+        >
+            Acessar sistema
+        </a>
+
+    {% else %}
+
+        <a
+            class="btn btn-primary"
+            href="/login"
+        >
+            Entrar
+        </a>
+
+        <a
+            class="btn btn-outline-secondary"
+            href="/cadastro"
+        >
+            Cadastrar
+        </a>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-8">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <h2 class="mb-4">
+                    {{ title }}
+                </h2>
+
+                <form method="POST">
+
+                    {% for campo in fields %}
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            {{ campo|replace("_", " ")|title }}
+
+                        </label>
+
+                        {% if campo == "descricao" or campo == "texto" or campo == "resposta" %}
+
+                        <textarea
+                            name="{{ campo }}"
+                            class="form-control"
+                            rows="4"
+                            required
+                        >{{ values.get(campo, "") }}</textarea>
+
+                        {% elif campo == "senha" %}
+
+                        <input
+                            type="password"
+                            name="{{ campo }}"
+                            class="form-control"
+                            {% if not values %}required{% endif %}
+                        >
+
+                        {% elif campo in ["preco", "valor_unitario"] %}
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="{{ campo }}"
+                            class="form-control"
+                            value="{{ values.get(campo, '') }}"
+                            required
+                        >
+
+                        {% elif campo in ["estoque", "usuario_id", "categoria_id", "quantidade", "comprador_id", "anuncio_id", "lista_id"] %}
+
+                        <input
+                            type="number"
+                            name="{{ campo }}"
+                            class="form-control"
+                            value="{{ values.get(campo, '') }}"
+                            required
+                        >
+
+                        {% else %}
+
+                        <input
+                            type="text"
+                            name="{{ campo }}"
+                            class="form-control"
+                            value="{{ values.get(campo, '') }}"
+                            required
+                        >
+
+                        {% endif %}
+
+                    </div>
+
+                    {% endfor %}
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        Salvar
+                    </button>
+
+                    <a
+                        href="/{{ endpoint }}"
+                        class="btn btn-secondary"
+                    >
+                        Cancelar
+                    </a>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
