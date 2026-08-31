@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Categoria{% endblock %}
+{% block content %}
+<h2>Categoria</h2>
+<form method="post" class="form">
+
+<label>Nome<input name="nome" required value="{{ registro.nome if registro else '' }}"></label>
+<label>Descrição<textarea name="descricao">{{ registro.descricao if registro else '' }}</textarea></label>
+
+<button class="button" type="submit">Salvar</button>
+<a href="{{ url_for('main.categorias') }}">Cancelar</a>
+</form>
+{% endblock %}

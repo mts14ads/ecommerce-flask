@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Favorito{% endblock %}
+{% block content %}
+<h2>Favorito</h2>
+<form method="post" class="form">
+
+<label>Lista<select name="lista_id" required>{% for l in listas %}<option value="{{ l.id }}" {% if registro and registro.lista_id == l.id %}selected{% endif %}>{{ l.nome }}</option>{% endfor %}</select></label>
+<label>Anúncio<select name="anuncio_id" required>{% for a in anuncios %}<option value="{{ a.id }}" {% if registro and registro.anuncio_id == a.id %}selected{% endif %}>{{ a.titulo }}</option>{% endfor %}</select></label>
+
+<button class="button" type="submit">Salvar</button>
+<a href="{{ url_for('main.favoritos') }}">Cancelar</a>
+</form>
+{% endblock %}
